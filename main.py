@@ -8,6 +8,7 @@ def Runge_method(k):
             res = (method(f, a, b, n * 2) - method(f, a, b, n)) / ((2 ** k) - 1)
             print(f"Runge: {res}")
             return method(f, a, b, n)
+        print("хуй соси")
 
         return wrapper
 
