@@ -26,8 +26,10 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install requirements
-        run: |
-          python3 -m pip install -r requirements.txt
+        run: python3 -m pip install -r requirements.txt
+
+      - name: Run pytest
+        run: python3 -m pytest test_pr_left_method.py
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
