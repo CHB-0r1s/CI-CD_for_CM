@@ -9,6 +9,7 @@ def Runge_method(k):
             print(f"Runge: {res}")
             return method(f, a, b, n)
         print("хуй соси")
+        print("134")
         print("губой тряси")
 
         return wrapper
