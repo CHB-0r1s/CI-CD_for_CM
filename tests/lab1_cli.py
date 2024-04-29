@@ -8,12 +8,15 @@ def dir_from_file(file_path, delimiter: str):
 
 def erase_meta_inf(row_file: bytes) -> (bytes, bytes):
     splited_row_file: list[bytes] = row_file.split(b"#")
-    test_data, erased_meta_inf = splited_row_file[:-1], splited_row_file[-1]
+    test_data, erased_meta_inf = b"".join(splited_row_file[:-1]), splited_row_file[-1]
+    print(test_data)
+    print(erased_meta_inf)
     return test_data, erased_meta_inf
 
 
 class Lab1API:
-    CWD_WIN_BORIS = "C:\\Users\\Борис\\PycharmProjects\\CI-CD_for_CM\\tests\\"
+    # CWD_WIN_BORIS = "C:\\Users\\Борис\\PycharmProjects\\CI-CD_for_CM\\tests\\"
+    CWD_WIN_BORIS = "/home/user/Desktop/CI-CD_for_CM/tests"
     CWD_PIPELINE = dir_from_file(__file__, "/")
 
     @staticmethod
