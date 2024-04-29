@@ -32,7 +32,9 @@ jobs:
         run: python3 -m pip install -r requirements.txt
 
       - name: Run pytest
-        run: python3 -m pytest test_pr_left_method.py
+        run: |
+          cd tests
+          python3 -m pytest test_input_format.py
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
