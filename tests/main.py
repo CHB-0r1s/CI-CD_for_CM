@@ -1,7 +1,6 @@
 import numpy as np
 
-test_input_1 = input()
-test_input_1 = input()
+test_file = open("lab1_test_result.txt", 'a')
 #f"Введите {q+1}-ую строчку A через пробел: "
 n = int(input("Введите размерность матрицы: "))
 
@@ -27,6 +26,7 @@ print(f"{B}")
 
 print("Определитель матрицы:")
 print(f"D = {D:20f}")
+test_file.write(f"{D:20}".strip() + "\n")
 
 if D == 0:
     raise Exception(
@@ -64,6 +64,7 @@ for i in range(n, 0, -1):
 
 print("X-матрица")
 print(X)
+test_file.write(" ".join([f"{x_:20f}".strip() for x_ in X]) + "\n")
 """
 3
 10 -7 0
@@ -73,6 +74,6 @@ print(X)
 """
 
 R = [sum([A[i][j] * X[j] for j in range(n)]) - B[i] for i in range(n)]
-
+test_file.write(" ".join([f"{r_:20f}".strip() for r_ in R]))
 print("Невязки: ")
 print(R)
