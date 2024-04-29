@@ -8,7 +8,7 @@ def dir_from_file(file_path, delimiter: str):
 
 
 d = "\\"
-FIXTURE_DIR_PATH = f'{dir_from_file(__file__, d)}\\input_format_fixtures'
+FIXTURE_DIR_PATH = f'{dir_from_file(__file__, d)}/input_format_fixtures'
 
 
 @pytest.mark.parametrize("file_with_test", [f"{FIXTURE_DIR_PATH}/01_empty_n_input.txt"])
