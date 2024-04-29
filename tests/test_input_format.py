@@ -7,7 +7,7 @@ def dir_from_file(file_path, delimiter: str):
     return delimiter.join(file_path.split(delimiter)[:-1])
 
 
-d = "\\"
+d = "/"
 FIXTURE_DIR_PATH = f'{dir_from_file(__file__, d)}/input_format_fixtures'
 
 
