@@ -24,7 +24,7 @@ class Lab1API:
         print(treated_input)
         command_and_param: list[str] = shlex.split(command, comments=False, posix=True)
         echo_command: list[str] = ["echo", f"\'{treated_input.decode('utf-8')}\'", "|"]
-        with open("t.sh", mode="a") as file:
+        with open("t.sh", mode="w") as file:
             file.write(" ".join(echo_command))
             file.write(" ".join(command_and_param))
         with Popen(["sh", "t.sh"], stdout=PIPE, stderr=PIPE, cwd=Lab1API.CWD_PIPELINE) as proc:
