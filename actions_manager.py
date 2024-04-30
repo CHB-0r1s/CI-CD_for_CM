@@ -11,8 +11,8 @@ class ActionsManager:
     FILE_WITH_RUN_CONFIG = "run.sh"
     DELIMITER = "/"
 
-    required_method: int  # TODO: Переделать на enum
-    run_configuration: str
+    required_method: int = None  # TODO: Переделать на enum
+    run_configuration: str = None
     current_dir: str = dir_from_file(__file__, DELIMITER)
 
     @classmethod
