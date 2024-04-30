@@ -34,7 +34,7 @@ def validate_output_gauss_zeidel(correct_output_file, checked_output_file, meta_
 def validate_output(meta_inf, test_file_path):
     print(test_file_path)
     test_dir_path, method, input_file_name = test_file_path.rsplit("/", 2)
-    output_file_name = f"{method}/{input_file_name.split(".")[0]}_ans.txt"
+    output_file_name = f"{method}/{input_file_name.split('.')[0]}_ans.txt"
     output_file_path = f"{test_dir_path}/../output_fixtures/{output_file_name}"
     print(output_file_path)
     correct_output_file = open(output_file_path, "r")
