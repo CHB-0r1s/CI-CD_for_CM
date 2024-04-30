@@ -5,11 +5,14 @@ import pytest
 from lab1_cli import Lab1API
 from actions_manager import ActionsManager
 
+
 def validate_output_gauss(correct_output_file, checked_output_file, meta_inf):
     return True
 
+
 def validate_output_gauss_an(correct_output_file, checked_output_file, meta_inf):
     return True
+
 
 def validate_output_simple_iteration(correct_output_file, checked_output_file, meta_inf):
     correct_x = correct_output_file.readline().strip().split()
@@ -28,8 +31,10 @@ def validate_output_simple_iteration(correct_output_file, checked_output_file, m
                 return False
         return True
 
+
 def validate_output_gauss_zeidel(correct_output_file, checked_output_file, meta_inf):
     return True
+
 
 def validate_output(meta_inf, test_file_path):
     print(test_file_path)
@@ -47,6 +52,7 @@ def validate_output(meta_inf, test_file_path):
         return validate_output_gauss_an(correct_output_file, checked_output_file, meta_inf)
     elif method == "":
         return validate_output_gauss_zeidel(correct_output_file, checked_output_file, meta_inf)
+
 
 def dir_from_file(file_path, delimiter: str):
     return delimiter.join(file_path.split(delimiter)[:-1])
