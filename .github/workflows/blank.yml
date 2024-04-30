@@ -33,7 +33,7 @@ jobs:
 
       - name: Run pytest
         run: |
-          cd test
+          cd tests
           python3 -m pytest test_input_format.py
 
       - name: Otladka
