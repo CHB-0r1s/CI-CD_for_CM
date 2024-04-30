@@ -28,20 +28,11 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-      - name: Install requirements
-        run: python3 -m pip install -r requirements.txt
+      - name: Install dependencies
+        run: sh deps.sh
 
       - name: Run pytest
-        run: |
-          cd tests
-          python3 -m pytest test_input_format.py
+        run: python3 -m pytest tests/test_input_format.py
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+      - name: Otladka
+        run: cat tests/t.sh

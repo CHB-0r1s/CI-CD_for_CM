@@ -1,6 +1,9 @@
+from os import listdir, path
+
 import pytest
 
 from lab1_cli import Lab1API
+from actions_manager import ActionsManager
 
 
 def f_Antoha(a, b):
@@ -11,12 +14,38 @@ def dir_from_file(file_path, delimiter: str):
     return delimiter.join(file_path.split(delimiter)[:-1])
 
 
-d = "\\"
-FIXTURE_DIR_PATH = f'{dir_from_file(__file__, d)}\\input_fixtures'
+d = "/"
+FIXTURE_DIR_PATH = f'{dir_from_file(__file__, d)}{d}input_fixtures'
 
 
-@pytest.mark.parametrize("test_file_path, ", [f"{FIXTURE_DIR_PATH}\\G_Regular\\01_empty_n_input.txt"])
+def collect_tests():
+    assert ActionsManager.catch_required_method() and ActionsManager.catch_run_config(), "Ошибка инициализации"
+    method = ActionsManager.required_method
+    # https://stackoverflow.com/questions/3207219/how-do-i-list-all-files-of-a-directory
+    if method == 1:
+        test_dir_path = FIXTURE_DIR_PATH + d + "G_Regular"
+    elif method == 2:
+        test_dir_path = FIXTURE_DIR_PATH + d + "Simple_Iter"
+    else:
+        raise Exception(method)
+
+    return [
+        path.join(test_dir_path, f)
+        for f in listdir(test_dir_path)
+        if path.isfile(path.join(test_dir_path, f))
+    ]
+
+
+@pytest.mark.dependency()
+def test_workflow_init():
+    assert ActionsManager.required_method, "Не удалось прочитать метод и stud-info.json"
+    assert ActionsManager.run_configuration, "Не удалось прочитать конфиг из run.sh"
+
+
+@pytest.mark.dependency(depends=["test_workflow_init"])
+@pytest.mark.parametrize("test_file_path", collect_tests())
 def test_empty_input(test_file_path):
-    return_code, meta_inf = Lab1API.write_in_console_from_file("python3 main_si.py", test_file_path)
+    run_command = ActionsManager.run_configuration
+    return_code, meta_inf = Lab1API.write_in_console_from_file(run_command, test_file_path)
     assert f_Antoha(meta_inf, test_file_path)
     assert return_code == 0
