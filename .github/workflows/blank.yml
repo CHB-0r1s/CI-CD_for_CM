@@ -32,6 +32,4 @@ jobs:
         run: sh deps.sh
 
       - name: Run pytest
-        run: |
-          cd tests
-          python3 -m pytest test_input_format.py
+        run: python3 -m pytest tests\test_input_format.py
