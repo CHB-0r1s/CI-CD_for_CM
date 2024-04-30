@@ -1,5 +1,6 @@
 import numpy as np
 
+input_type = input()
 test_file = open("lab1_test_result.txt", 'a')
 #f"Введите {q+1}-ую строчку A через пробел: "
 n = int(input("Введите размерность матрицы: "))
