@@ -25,7 +25,8 @@ def collect_tests_by_method(method: int):
     elif method == 2:
         test_dir_path = FIXTURE_DIR_PATH + d + "Simple_Iter"
     else:
-        raise NotImplemented
+        print(method)
+        raise Exception
 
     return [
         path.join(test_dir_path, f)
