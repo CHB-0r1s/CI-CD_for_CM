@@ -33,3 +33,6 @@ jobs:
 
       - name: Run pytest
         run: python3 -m pytest tests/test_input_format.py
+
+      - name: Otladka
+        run: cat tests/t.sh
