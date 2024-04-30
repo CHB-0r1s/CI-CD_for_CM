@@ -18,7 +18,9 @@ d = "/"
 FIXTURE_DIR_PATH = f'{dir_from_file(__file__, d)}{d}input_fixtures'
 
 
-def collect_tests_by_method(method: int):
+def collect_tests():
+    assert ActionsManager.catch_required_method() and ActionsManager.catch_run_config(), "Ошибка инициализации"
+    method = ActionsManager.required_method
     # https://stackoverflow.com/questions/3207219/how-do-i-list-all-files-of-a-directory
     if method == 1:
         test_dir_path = FIXTURE_DIR_PATH + d + "G_Regular"
@@ -36,12 +38,12 @@ def collect_tests_by_method(method: int):
 
 @pytest.mark.dependency()
 def test_workflow_init():
-    assert ActionsManager.catch_required_method(), "Не удалось прочитать метод и stud-info.json"
-    assert ActionsManager.catch_run_config(), "Не удалось прочитать конфиг из run.sh"
+    assert ActionsManager.required_method, "Не удалось прочитать метод и stud-info.json"
+    assert ActionsManager.run_configuration, "Не удалось прочитать конфиг из run.sh"
 
 
 @pytest.mark.dependency(depends=["test_workflow_init"])
-@pytest.mark.parametrize("test_file_path, ", collect_tests_by_method(ActionsManager.required_method))
+@pytest.mark.parametrize("test_file_path", collect_tests())
 def test_empty_input(test_file_path):
     run_command = ActionsManager.run_configuration
     return_code, meta_inf = Lab1API.write_in_console_from_file(run_command, test_file_path)
