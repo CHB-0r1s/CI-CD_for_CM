@@ -7,8 +7,8 @@ def dir_from_file(file_path, delimiter: str):
 
 
 class ActionsManager:
-    JSON_WTH_METHOD_INFO = "stud-info.json"
-    FILE_WITH_RUN_CONFIG = "run.sh"
+    JSON_WTH_METHOD_INFO = "../stud-info.json"
+    FILE_WITH_RUN_CONFIG = "../run.sh"
     DELIMITER = "/"
 
     required_method: int = None  # TODO: Переделать на enum
