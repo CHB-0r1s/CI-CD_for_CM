@@ -32,7 +32,9 @@ jobs:
         run: sh deps.sh
 
       - name: Run pytest
-        run: python3 -m pytest tests/test_input_format.py
+        run: |
+          cd test
+          python3 -m pytest test_input_format.py
 
       - name: Otladka
         run: cat tests/t.sh
