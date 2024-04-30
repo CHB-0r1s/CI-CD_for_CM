@@ -15,9 +15,9 @@ class ActionsManager:
     run_configuration: str = None
     current_dir: str = dir_from_file(__file__, DELIMITER)
 
-    @classmethod
-    def catch_required_method(cls) -> bool:
-        json_path = cls.current_dir + cls.DELIMITER + cls.JSON_WTH_METHOD_INFO
+    @staticmethod
+    def catch_required_method() -> bool:
+        json_path = ActionsManager.current_dir + ActionsManager.DELIMITER + ActionsManager.JSON_WTH_METHOD_INFO
         if not os.path.exists(json_path):
             return False
         row_json_data = open(json_path).read()
@@ -26,15 +26,15 @@ class ActionsManager:
         if stud_method:
             if isinstance(stud_method, str):
                 stud_method = int(stud_method)
-            cls.required_method = stud_method
+            ActionsManager.required_method = stud_method
         return bool(stud_method)
 
-    @classmethod
-    def catch_run_config(cls) -> bool:
-        sh_path = cls.current_dir + cls.DELIMITER + cls.FILE_WITH_RUN_CONFIG
+    @staticmethod
+    def catch_run_config() -> bool:
+        sh_path = ActionsManager.current_dir + ActionsManager.DELIMITER + ActionsManager.FILE_WITH_RUN_CONFIG
         if not os.path.exists(sh_path):
             return False
         run_data = open(sh_path).read().strip()
         if run_data:
-            cls.run_configuration = run_data
+            ActionsManager.run_configuration = run_data
         return bool(run_data)
