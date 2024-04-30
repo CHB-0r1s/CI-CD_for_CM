@@ -83,7 +83,7 @@ def main(dim, nums, eps):
             print("".join(i[z].ljust(col_width[z]) for z in range(len(i))))
 
     if not ddd:
-        for i in res_table[-1][1:]:
+        for i in res_table[-1][1:dim+1]:
             an.write(i + " ")
 
 def check_lin(dim, nums):
@@ -161,8 +161,11 @@ def enter_var():
 def enter_n():
     print("Вводите размерность матрицы:")
     while True:
-        n = int(input())
-
+        try:
+            n = int(input())
+        except:
+            print("Введенная строка не число")
+            continue
         if n < 2:
             print("Размерность матрицы должна быть 2 или больше. Повторите ввод:")
             continue
