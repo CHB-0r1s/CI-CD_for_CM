@@ -5,10 +5,48 @@ import pytest
 from lab1_cli import Lab1API
 from actions_manager import ActionsManager
 
-
-def f_Antoha(a, b):
+def validate_output_gauss(correct_output_file, checked_output_file, meta_inf):
     return True
 
+def validate_output_gauss_an(correct_output_file, checked_output_file, meta_inf):
+    return True
+
+def validate_output_simple_iteration(correct_output_file, checked_output_file, meta_inf):
+    correct_x = correct_output_file.readline().strip().split()
+    checked_x = checked_output_file.readline().strip().split()
+    if len(correct_x) == 1:
+        if correct_x == checked_x:
+            return True
+    else:
+        eps = float(meta_inf.replace(",", "."))
+        correct_x = list(map(float, correct_x))
+        checked_x = list(map(float, checked_x))
+        for x, y in zip(checked_x, correct_x):
+            if x - y <= eps:
+                continue
+            else:
+                return False
+        return True
+
+def validate_output_gauss_zeidel(correct_output_file, checked_output_file, meta_inf):
+    return True
+
+def validate_output(meta_inf, test_file_path):
+    print(test_file_path)
+    test_dir_path, method, input_file_name = test_file_path.rsplit("/", 2)
+    output_file_name = f"{method}/{input_file_name.split(".")[0]}_ans.txt"
+    output_file_path = f"{test_dir_path}/../output_fixtures/{output_file_name}"
+    print(output_file_path)
+    correct_output_file = open(output_file_path, "r")
+    checked_output_file = open(f"{test_dir_path}/../lab1_test_result.txt", "r")
+    if method == "Simple_Iter":
+        return validate_output_simple_iteration(correct_output_file, checked_output_file, meta_inf)
+    elif method == "G_Regular":
+        return validate_output_gauss(correct_output_file, checked_output_file, meta_inf)
+    elif method == "":
+        return validate_output_gauss_an(correct_output_file, checked_output_file, meta_inf)
+    elif method == "":
+        return validate_output_gauss_zeidel(correct_output_file, checked_output_file, meta_inf)
 
 def dir_from_file(file_path, delimiter: str):
     return delimiter.join(file_path.split(delimiter)[:-1])
@@ -47,5 +85,5 @@ def test_workflow_init():
 def test_empty_input(test_file_path):
     run_command = ActionsManager.run_configuration
     return_code, meta_inf = Lab1API.write_in_console_from_file(run_command, test_file_path)
-    assert f_Antoha(meta_inf, test_file_path)
+    assert validate_output(meta_inf, test_file_path)
     assert return_code == 0
