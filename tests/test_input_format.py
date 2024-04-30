@@ -26,7 +26,7 @@ def collect_tests_by_method(method: int):
         test_dir_path = FIXTURE_DIR_PATH + d + "Simple_Iter"
     else:
         print(method)
-        raise Exception
+
 
     return [
         path.join(test_dir_path, f)
@@ -35,13 +35,13 @@ def collect_tests_by_method(method: int):
     ]
 
 
-def test_workflow_init():
+def test_01_workflow_init():
     assert ActionsManager.catch_required_method(), "Не удалось прочитать метод и stud-info.json"
     assert ActionsManager.catch_run_config(), "Не удалось прочитать конфиг из run.sh"
 
 
 @pytest.mark.parametrize("test_file_path, ", collect_tests_by_method(ActionsManager.required_method))
-def test_empty_input(test_file_path):
+def test_02_empty_input(test_file_path):
     run_command = ActionsManager.run_configuration
     return_code, meta_inf = Lab1API.write_in_console_from_file(run_command, test_file_path)
     assert f_Antoha(meta_inf, test_file_path)
