@@ -21,7 +21,7 @@ class Lab1API:
     def write_in_console_from_file(command, file_path: str) -> (int, bytes):
         file_with_input = open(file_path, "r")
         treated_input, meta_inf = erase_meta_inf(file_with_input.read().replace("\r", ""))
-        print(treated_input)
+        print(__file__)
         command_and_param: list[str] = shlex.split(command, comments=False, posix=True)
         echo_command: list[str] = ["echo", f"\'{treated_input}\'", "|"]
         with open("t.sh", mode="w") as file:
