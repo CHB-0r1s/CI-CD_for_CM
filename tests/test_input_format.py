@@ -47,7 +47,7 @@ def validate_output(meta_inf, test_file_path):
     checked_output_file = open(f"{test_dir_path}/lab1_test_result.txt", "r")
     if method == "Simple_Iter":
         return validate_output_simple_iteration(correct_output_file, checked_output_file, meta_inf)
-    elif method == "G_Regular":
+    elif method == "Gauss_Regular":
         return validate_output_gauss(correct_output_file, checked_output_file, meta_inf)
     elif method == "":
         return validate_output_gauss_an(correct_output_file, checked_output_file, meta_inf)
@@ -68,7 +68,7 @@ def collect_tests():
     method = ActionsManager.required_method
     # https://stackoverflow.com/questions/3207219/how-do-i-list-all-files-of-a-directory
     if method == 1:
-        test_dir_path = FIXTURE_DIR_PATH + d + "G_Regular"
+        test_dir_path = FIXTURE_DIR_PATH + d + "Gauss_Regular"
     elif method == 2:
         test_dir_path = FIXTURE_DIR_PATH + d + "Simple_Iter"
     else:
