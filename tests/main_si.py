@@ -1,6 +1,5 @@
 import os
 import sys
-import matplotlib
 
 an = open("lab1_test_result.txt", "w")
 
