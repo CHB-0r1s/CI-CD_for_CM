@@ -1,7 +1,7 @@
 import numpy as np
 
 input_type = input()
-test_file = open("lab1_test_result.txt", 'a')
+test_file = open("lab1_test_result.txt", 'w')
 #f"Введите {q+1}-ую строчку A через пробел: "
 n = int(input("Введите размерность матрицы: "))
 
@@ -44,6 +44,9 @@ for i in range(1, n):
         else:
             raise Exception("Система не решаема")
     for k in range(i + 1, n + 1):
+        for z in A:
+            print(z)
+        print("--")
         c = A[k - 1][i - 1] / A[i - 1][i - 1]
         A[k - 1][i - 1] = 0
 
