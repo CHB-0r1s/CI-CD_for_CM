@@ -7,8 +7,20 @@ from actions_manager import ActionsManager
 
 
 def validate_output_gauss(correct_output_file, checked_output_file, meta_inf):
-    return True
-
+    correct_x = correct_output_file.readline().strip().split()
+    checked_x = checked_output_file.readline().strip().split()
+    if len(correct_x) == 1:
+        if correct_x == checked_x:
+            return True
+    else:
+        correct_x = list(map(float, correct_x))
+        checked_x = list(map(float, checked_x))
+        for x, y in zip(checked_x, correct_x):
+            if x - y <= 0.001:
+                continue
+            else:
+                return False
+        return True
 
 def validate_output_gauss_an(correct_output_file, checked_output_file, meta_inf):
     return True
@@ -33,7 +45,7 @@ def validate_output_simple_iteration(correct_output_file, checked_output_file, m
 
 
 def validate_output_gauss_zeidel(correct_output_file, checked_output_file, meta_inf):
-    return True
+    return validate_output_simple_iteration(correct_output_file, checked_output_file, meta_inf)
 
 
 def validate_output(meta_inf, test_file_path):
@@ -49,7 +61,7 @@ def validate_output(meta_inf, test_file_path):
         return validate_output_simple_iteration(correct_output_file, checked_output_file, meta_inf)
     elif method == "Gauss_Regular":
         return validate_output_gauss(correct_output_file, checked_output_file, meta_inf)
-    elif method == "":
+    elif method == "Gauss_Zeidel":
         return validate_output_gauss_an(correct_output_file, checked_output_file, meta_inf)
     elif method == "":
         return validate_output_gauss_zeidel(correct_output_file, checked_output_file, meta_inf)
@@ -71,6 +83,8 @@ def collect_tests():
         test_dir_path = FIXTURE_DIR_PATH + d + "Gauss_Regular"
     elif method == 2:
         test_dir_path = FIXTURE_DIR_PATH + d + "Simple_Iter"
+    elif method == 3:
+        test_dir_path = FIXTURE_DIR_PATH + d + "Gauss_Zeidel"
     else:
         raise Exception(method)
 
