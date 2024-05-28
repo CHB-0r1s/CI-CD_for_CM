@@ -2,7 +2,7 @@ import os
 import sys
 
 an = open("lab1_test_result.txt", "w")
-
+A = 123
 def main(dim, nums, eps):
     ret = diag_matr(dim, nums)
     nums = ret[0]
