@@ -36,12 +36,14 @@ class Lab1API:
         Функция объединяет входные данные и команду для запуска в конвейер,
         запаковывая результат в отдельный файл t.sh. После чего запускает его:
 
-        >> sh t.sh
+        >> sh RUN_FILE_NAME
         """
+        RUN_FILE_NAME = "t.sh"
+
         file_with_input = open(file_path, "r")
 
         treated_input, meta_inf = erase_meta_inf(file_with_input.read().replace("\r", ""))
-        create_run_file("t.sh", run_command, treated_input)
+        create_run_file(RUN_FILE_NAME, run_command, treated_input)
 
-        with Popen(["sh", "t.sh"], stdout=PIPE, stderr=PIPE, cwd=Lab1API.CWD_PIPELINE) as proc:
+        with Popen(["sh", RUN_FILE_NAME], stdout=PIPE, stderr=PIPE, cwd=Lab1API.CWD_PIPELINE) as proc:
             return proc.wait(), meta_inf
