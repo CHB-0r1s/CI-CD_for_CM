@@ -22,6 +22,7 @@ def validate_output_gauss(correct_output_file, checked_output_file, meta_inf):
                 return False
         return True
 
+
 def validate_output_gauss_an(correct_output_file, checked_output_file, meta_inf):
     return True
 
