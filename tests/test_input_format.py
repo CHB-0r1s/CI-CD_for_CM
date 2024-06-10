@@ -106,6 +106,6 @@ def test_workflow_init():
 @pytest.mark.parametrize("test_file_path", collect_tests())
 def test_empty_input(test_file_path):
     run_command = ActionsManager.run_configuration
-    return_code, meta_inf = Lab1API.write_in_console_from_file(run_command, test_file_path)
+    return_code, meta_inf = Lab1API.run_with_input_file(run_command, test_file_path)
     assert validate_output(meta_inf, test_file_path)
     assert return_code == 0

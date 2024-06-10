@@ -18,16 +18,26 @@ class Lab1API:
     CWD_PIPELINE = dir_from_file(__file__, "/")
 
     @staticmethod
-    def write_in_console_from_file(command, file_path: str) -> (int, bytes):
+    def run_with_input_file(run_command: str, file_path: str) -> (str, str):
+        """
+        :param run_command: Строка с командами запуска
+        :param file_path: Путь до файла с входными данными
+        :return: Статус запуска и метаинформация
+
+        Функция объединяет входные данные и команду для запуска в конвейер,
+        запаковывая результат в отдельный файл t.sh. После чего запускает его:
+
+        >> sh t.sh
+        """
         file_with_input = open(file_path, "r")
         treated_input, meta_inf = erase_meta_inf(file_with_input.read().replace("\r", ""))
-        print(__file__)
-        command_and_param: list[str] = shlex.split(command, comments=False, posix=True)
+
+        run_command_and_param: list[str] = shlex.split(run_command, comments=False, posix=True)
         echo_command: list[str] = ["echo", f"\'{treated_input}\'", "|"]
+
         with open("t.sh", mode="w") as file:
             file.write(" ".join(echo_command))
-            file.write(" ".join(command_and_param))
-        print("---------------------------")
-        print(open("t.sh").read())
+            file.write(" ".join(run_command_and_param))
+
         with Popen(["sh", "t.sh"], stdout=PIPE, stderr=PIPE, cwd=Lab1API.CWD_PIPELINE) as proc:
             return proc.wait(), meta_inf
