@@ -12,6 +12,15 @@ def erase_meta_inf(row_file: str) -> (str, str):
     return test_data, erased_meta_inf
 
 
+def create_run_file(file_name: str, run_command: str, input_data: str) -> None:
+    echo_command: list[str] = ["echo", f"\'{input_data}\'", "|"]
+    run_command_and_param: list[str] = shlex.split(run_command, comments=False, posix=True)
+
+    with open(file_name, mode="w") as file:
+        file.write(" ".join(echo_command))
+        file.write(" ".join(run_command_and_param))
+
+
 class Lab1API:
     CWD_WIN_BORIS = "C:\\Users\\Борис\\PycharmProjects\\CI-CD_for_CM\\tests\\"
     # CWD_WIN_BORIS = "/home/user/Desktop/CI-CD_for_CM/tests"
@@ -30,14 +39,9 @@ class Lab1API:
         >> sh t.sh
         """
         file_with_input = open(file_path, "r")
+
         treated_input, meta_inf = erase_meta_inf(file_with_input.read().replace("\r", ""))
-
-        run_command_and_param: list[str] = shlex.split(run_command, comments=False, posix=True)
-        echo_command: list[str] = ["echo", f"\'{treated_input}\'", "|"]
-
-        with open("t.sh", mode="w") as file:
-            file.write(" ".join(echo_command))
-            file.write(" ".join(run_command_and_param))
+        create_run_file("t.sh", run_command, treated_input)
 
         with Popen(["sh", "t.sh"], stdout=PIPE, stderr=PIPE, cwd=Lab1API.CWD_PIPELINE) as proc:
             return proc.wait(), meta_inf
