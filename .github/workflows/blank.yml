@@ -6,9 +6,9 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "*" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "*" ]
+    branches: [ "main" ]
     permissions:
       checks: write
       contents: read
@@ -31,10 +31,17 @@ jobs:
       - name: Install dependencies
         run: sh deps.sh
 
-      - name: Run pytest
+      - name: Clone private repository
         run: |
-          cd tests
-          python3 -m pytest test_input_format.py
+          git clone https://${{secrets.LAB1_SECRET}}@github.com/CHB-0r1s/lab_1_tests
+          cd lab_1_tests 
+          mv * ..
+          cd ..
+          rm -rf lab_1_tests
 
-      - name: Otladka
-        run: cat tests/t.sh
+      - name: List files in the cloned repository
+        run: ls . -R
+
+
+      - name: Run pytest
+        run: python3 -m pytest test_input_format.py
