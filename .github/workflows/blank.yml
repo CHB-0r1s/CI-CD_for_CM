@@ -43,5 +43,5 @@ jobs:
         run: ls .
 
 
-#      - name: Run pytest
-#        run: python3 -m pytest test_input_format.py
+      - name: Run pytest
+        run: python3 -m pytest test_input_format.py
