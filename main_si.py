@@ -3,6 +3,7 @@ import sys
 
 an = open("tests/lab1_test_result.txt", "w")
 
+
 def main(dim, nums, eps):
     ret = diag_matr(dim, nums)
     nums = ret[0]
@@ -12,13 +13,15 @@ def main(dim, nums, eps):
     res_lin = check_lin(dim, nums)
 
     if res_lin:
-        print("Матрица линейно зависима, а значит существует бесконечное число решений, следовательно данный метод не применим.")
+        print(
+            "Матрица линейно зависима, а значит существует бесконечное число решений, следовательно данный метод не применим.")
         an.write("0")
         sys.exit()
 
     ddd = False
     if not res:
-        print("Для данной матрицы условие преобладания диагональных элементов не выполняется, а значит сходимость не гарантированна. Будет проведено 100 итераций. Если в результате не будет достигнута заданная точность, значит найти решение таким методом невозможно.")
+        print(
+            "Для данной матрицы условие преобладания диагональных элементов не выполняется, а значит сходимость не гарантированна. Будет проведено 100 итераций. Если в результате не будет достигнута заданная точность, значит найти решение таким методом невозможно.")
         ddd = True
         an.write("1")
 
@@ -36,21 +39,21 @@ def main(dim, nums, eps):
     res_table = [[], []]
 
     res_table[0].append("k")
-    res_table[0] += [f"x{x}^k" for x in range(1, dim+1)]
-    res_table[0] += [f"x{x}^(k) - x{x}^(k-1)" for x in range(1, dim+1)]
+    res_table[0] += [f"x{x}^k" for x in range(1, dim + 1)]
+    res_table[0] += [f"x{x}^(k) - x{x}^(k-1)" for x in range(1, dim + 1)]
     res_table[0].append("max|xi^(k) - xi^(k-1)|")
 
     res_table[1].append("0")
     res_table[1] += list(map(str, apr))
-    res_table[1] += ["-" for x in range(dim+1)]
+    res_table[1] += ["-" for x in range(dim + 1)]
     for k in range(100):
         next_apr = []
         res_table.append([])
         for i in range(dim):
             next_apr.append(sum((
-                coef[i][x]*apr[x] for x in range(dim)
+                coef[i][x] * apr[x] for x in range(dim)
             )) + d[i])
-        dif_apr = [abs(next_apr[x]-apr[x]) for x in range(dim)]
+        dif_apr = [abs(next_apr[x] - apr[x]) for x in range(dim)]
         rr = False
         if max(dif_apr) < eps:
             rr = True
@@ -60,10 +63,10 @@ def main(dim, nums, eps):
         #     next_apr[i] = round(next_apr[i], 12)
         # for i in range(dim):
         #     dif_apr[i] = round(dif_apr[i], 12)
-        res_table[k+2].append(str(k+1))
-        res_table[k+2] += list(map(str, next_apr))
-        res_table[k+2] += list(map(str, dif_apr))
-        res_table[k+2].append(str(max(dif_apr)))
+        res_table[k + 2].append(str(k + 1))
+        res_table[k + 2] += list(map(str, next_apr))
+        res_table[k + 2] += list(map(str, dif_apr))
+        res_table[k + 2].append(str(max(dif_apr)))
 
         if rr:
             break
@@ -77,27 +80,28 @@ def main(dim, nums, eps):
             for z in res_table:
                 if len(str(z[i])) > ma:
                     ma = len(str(z[i]))
-            col_width.append(ma+4)
+            col_width.append(ma + 4)
         col_width.append(0)
         for i in res_table:
             print("".join(i[z].ljust(col_width[z]) for z in range(len(i))))
 
     if not ddd:
-        for i in res_table[-1][1:dim+1]:
+        for i in res_table[-1][1:dim + 1]:
             an.write(i + " ")
+
 
 def check_lin(dim, nums):
     res = False
     for i in range(len(nums)):
         loc_res = True
-        for z in range(i+1, len(nums)):
+        for z in range(i + 1, len(nums)):
             k = ""
             for l in range(len(nums[i])):
                 try:
                     if k == "":
-                        k = nums[i][l]/nums[z][l]
+                        k = nums[i][l] / nums[z][l]
                     else:
-                        if nums[i][l]/nums[z][l] != k:
+                        if nums[i][l] / nums[z][l] != k:
                             loc_res = False
                             break
                 except:
@@ -113,6 +117,7 @@ def check_lin(dim, nums):
         if loc_res:
             break
     return res
+
 
 def diag_matr(dim, nums):
     d = []
@@ -147,6 +152,7 @@ def diag_matr(dim, nums):
             return [diag_nums, diag_d, False]
     return [diag_nums, diag_d, True]
 
+
 def enter_var():
     print("Хотите осуществить ввод с клавиатуры или из файла?\n"
           "Введите 1 если с клавиатуры и 2 если из файла:")
@@ -157,6 +163,7 @@ def enter_var():
             continue
         break
     return var
+
 
 def enter_n():
     print("Вводите размерность матрицы:")
@@ -171,6 +178,7 @@ def enter_n():
             continue
         break
     return n
+
 
 def enter_eps():
     print("Введите допустимую погрешность")
@@ -187,6 +195,7 @@ def enter_eps():
             continue
         break
     return eps
+
 
 def enter_coef_line(n):
     while True:
@@ -206,6 +215,7 @@ def enter_coef_line(n):
             continue
         break
     return line
+
 
 def enter_path():
     print("Введите путь до файла.\n"
@@ -258,12 +268,12 @@ def data_entry():
         if not res:
             if err_line != -1:
                 print(f"Формат файла неверный. Ошибка в строке:\n"
-                  f"{err_line}")
+                      f"{err_line}")
             else:
                 print("Файл пуст")
         else:
             main(n, nums, eps)
 
+
 if __name__ == "__main__":
     data_entry()
-
