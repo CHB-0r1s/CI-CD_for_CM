@@ -37,7 +37,7 @@ jobs:
           cd lab_1_tests 
           mv * ..
           cd ..
-          ls .. -R
+          ls . -R
 
       - name: List files in the cloned repository
         run: ls .
