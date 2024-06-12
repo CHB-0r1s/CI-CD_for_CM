@@ -1,7 +1,7 @@
 import os
 import sys
 
-an = open("tests/lab1_test_result.txt", "w")
+an = open("lab1_test_result.txt", "w")
 
 
 def main(dim, nums, eps):
