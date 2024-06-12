@@ -33,12 +33,11 @@ jobs:
 
       - name: Clone private repository
         run: |
-          mkdir private-repo
           git clone https://${{secrets.LAB1_SECRET}}@github.com/CHB-0r1s/lab_1_tests.git private-repo
-          cd private_repo 
+          cd lab_1_tests 
           mv * ..
           cd ..
-          rmdir private_repo
+          rmdir lab_1_tests
 
       - name: List files in the cloned repository
         run: ls .
