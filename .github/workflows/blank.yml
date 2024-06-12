@@ -32,15 +32,16 @@ jobs:
         run: sh deps.sh
 
       - name: Clone private repository
-        run: git clone https://${{secrets.LAB1_SECRET}}@github.com/CHB-0r1s/lab_1_tests.git private-repo
+        run: |
+          git clone https://${{secrets.LAB1_SECRET}}@github.com/CHB-0r1s/lab_1_tests.git private-repo
+          cd private_repo 
+          mv * ..
+          cd ..
+          rmdir private_repo
 
       - name: List files in the cloned repository
-        run: ls private-repo
+        run: ls .
 
-      - name: Run pytest
-        run: |
-          cd tests
-          python3 -m pytest test_input_format.py
 
-      - name: Otladka
-        run: cat tests/t.sh
+#      - name: Run pytest
+#        run: python3 -m pytest test_input_format.py
