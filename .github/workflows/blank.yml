@@ -31,6 +31,12 @@ jobs:
       - name: Install dependencies
         run: sh deps.sh
 
+      - name: Clone private repository
+        run: git clone https://${{secrets.LAB1_SECRET}}@github.com/CHB-0r1s/lab_1_tests.git private-repo
+
+      - name: List files in the cloned repository
+        run: ls private-repo
+
       - name: Run pytest
         run: |
           cd tests
