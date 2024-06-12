@@ -50,6 +50,7 @@ def validate_output_gauss_zeidel(correct_output_file, checked_output_file, meta_
 
 
 def validate_output(meta_inf, test_file_path):
+    # TODO: прописать/устранить неявную логику метча тестов и ответов (если по имени, то как BORIS FIX проходит?)
     print(test_file_path)
     test_dir_path, method, input_file_name = test_file_path.rsplit("/", 2)
     test_dir_path = test_dir_path.rsplit("/", 1)[0]
