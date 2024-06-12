@@ -40,7 +40,7 @@ jobs:
           rm -rf lab_1_tests
 
       - name: List files in the cloned repository
-        run: ls .
+        run: ls . -R
 
 
       - name: Run pytest
