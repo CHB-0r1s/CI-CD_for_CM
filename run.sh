@@ -1,1 +1,1 @@
-java -jar untitled2.jar
+sudo java -jar untitled2.jar
