@@ -1,1 +1,1 @@
-java -jar untitled2.jar
+python3 main_si.py
