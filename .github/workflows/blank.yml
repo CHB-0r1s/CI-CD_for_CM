@@ -46,6 +46,10 @@ jobs:
         run: python3 -m pip install -r test_lab1_requirements.txt
 
 
+      - name: Run
+        run: sh run.sh
+
+
 #      - name: Run pytest
 #        run: python3 -m pytest test_input_format.py
 
