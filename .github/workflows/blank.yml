@@ -33,7 +33,7 @@ jobs:
 
       - name: Clone private repository
         run: |
-          git clone https://${{secrets.LAB1_SECRET}}@github.com/CHB-0r1s/lab_1_tests
+          git clone https://github.com/CHB-0r1s/lab_1_tests
           cd lab_1_tests 
           mv * ..
           cd ..
