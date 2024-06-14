@@ -1,1 +1,1 @@
-apt install openjdk-19-jre-headless
+sudo apt install openjdk-19-jre-headless
