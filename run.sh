@@ -1,1 +1,1 @@
-sudo java -jar untitled3.jar
+python3 main_si.py
