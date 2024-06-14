@@ -1,2 +1,1 @@
-python3 -m pip install -r requirements.txt
-python3 -m pip install matplotlib
+untitled.jarsudo apt install openjdk-19-jre-headless
