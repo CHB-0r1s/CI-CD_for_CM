@@ -3,7 +3,7 @@ import docker
 TEST_SUCCESS_STR = "test_input_format.py ......                                              [100%]"
 
 client = docker.from_env()
-client.images.build(path="Dockerfile")
+client.images.build(path=".", tag="my-cicd")
 
 print(client.images.list())
 
